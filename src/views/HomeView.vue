@@ -16,6 +16,14 @@ import TheBaseLayout from '@/components/template/TheBaseLayout.vue'
 
       <template #content>
         <h2 class="uppercase font-bold tracking-wide mb-[20px]">ALL NOTES</h2>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div v-for="i in 5" class="w-full bg-yellow-200 rotate-2 border">
+            <div class="w-full bg-yellow-200 -rotate-2 p-5 shadow-lg border cursor-pointer">
+              qwe
+            </div>
+          </div>
+        </div>
       </template>
     </TheBaseLayout>
   </div>
