@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import InputField from '@/components/atom/input/InputField.vue'
+
+const router = useRouter()
 
 const username = ref('')
 const password = ref('')
+
+const signIn = () => {
+  router.push('/')
+}
 </script>
 
 <template>
-  <form class="py-[30px] flex flex-col gap-3">
+  <form @submit.prevent="signIn()" class="py-[30px] flex flex-col gap-3">
     <InputField
       id="username"
       inputName="username"
