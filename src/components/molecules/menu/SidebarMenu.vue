@@ -4,7 +4,7 @@ import SidebarLink from '@/components/atom/link/SidebarLink.vue'
 const sidebarMenu = [
   { name: 'Dashboard', path: 'home' },
   { name: 'Notes', path: 'notes' },
-  { name: 'Settings', path: 'settings' },
+  { name: 'Settings', path: 'settings' }
 ]
 </script>
 

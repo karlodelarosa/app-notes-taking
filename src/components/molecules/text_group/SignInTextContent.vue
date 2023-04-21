@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import CheckIcon from '@/components/atom/svg/CheckIcon.vue'
-import ListBasic from '../list/ListBasic.vue';
+import ListBasic from '../list/ListBasic.vue'
 
-const items = [
-  'Note Taking',
-  'View notes',
-  'User Settings'
-]
+const items = ['Note Taking', 'View notes', 'User Settings']
 </script>
 
 <template>
@@ -23,11 +19,11 @@ const items = [
 </template>
 
 <style scoped>
-.content > h1{
-  @apply text-white text-4xl font-bold mb-2
+.content > h1 {
+  @apply text-white text-4xl font-bold mb-2;
 }
 
-.content > p{
-  @apply text-gray-300 text-lg
+.content > p {
+  @apply text-gray-300 text-lg;
 }
 </style>

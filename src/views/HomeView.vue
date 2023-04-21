@@ -1,7 +1,23 @@
 <script setup lang="ts">
-import TheBaseLayout from '@/components/template/TheBaseLayout.vue'
+import TheContainer from '@/components/template/TheContainer.vue'
+import LabelTag from '@/components/atom/label/LabelTag.vue'
+
+const labels = [
+  { name: 'Label 1', isActive: true },
+  { name: 'Label 2', isActive: true },
+  { name: 'Label 3', isActive: false }
+]
 </script>
 
 <template>
-  <h1 class="text-red-500">Hi there</h1>
+  <TheContainer page-name="Dashboard">
+    <div class="grid grid-cols-2 items-center justify-between">
+      <div class="flex flex-row gap-1">
+        <template v-for="(label, key) in labels" :key="key">
+          <LabelTag :text="label.name" :status="label.isActive" />
+        </template>
+      </div>
+      <div class="ml-auto">search</div>
+    </div>
+  </TheContainer>
 </template>

@@ -69,7 +69,6 @@ body {
   background: #555;
 }
 
-
 .app-wrapper {
   width: 100%;
   margin: 0 auto;
@@ -115,4 +114,8 @@ body {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+main.content {
+  @apply px-[50px] py-[30px];
 }

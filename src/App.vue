@@ -6,9 +6,9 @@ import TheBaseLayout from './components/template/TheBaseLayout.vue'
 <template>
   <TheBaseLayout>
     <router-view v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
-          <component :is="Component" />
-        </transition>
-      </router-view>
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </TheBaseLayout>
 </template>
