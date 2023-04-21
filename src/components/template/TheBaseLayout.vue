@@ -1,18 +1,16 @@
+<script setup lang="ts">
+import SidebarPanel from '../organism/SidebarPanel.vue'
+import TopMenu from '../molecules/menu/TopMenu.vue'
+</script>
+
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-12 min-h-screen">
-    <aside class="col-span-3 ">
-      <slot name="left-sidebar"></slot>
-    </aside>
-    <main class="col-span-7 bg-white px-[20px]">
-      <slot name="content"></slot>
-    </main>
-    <aside class="col-span-2 bg-white">
-      <slot name="right-sidebar"></slot>
-    </aside>
+  <div class="w-full h-screen md:flex bg-red-200">
+    <SidebarPanel />
+    <div class="flex-1 bg-neutral-1 text-white">
+      <TopMenu />
+      <main>
+        <slot></slot>
+      </main>
+    </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-
-}
-</script>
