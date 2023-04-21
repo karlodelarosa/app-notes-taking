@@ -1,6 +1,6 @@
 export const notes = [
   {
-    title: 'One Hundred days of code',
+    title: 'One Hundred days of coding in typescript',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui blanditiis soluta, atque maxime nesciunt aut aliquid illo recusandae tempore sint perspiciatis. , atque maxime nesciunt aut aliquid illo recusandae tempore sint perspiciatis ',
     labels: ['Label 1', 'Label 2', 'Label 3'],

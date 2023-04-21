@@ -5,11 +5,6 @@ import TheNoteContainer from '@/components/template/TheNoteContainer.vue'
 import SearchField from '@/components/atom/input/SearchField.vue'
 import { notes } from '@/js/mock_data/sample_notes'
 
-const labels = [
-  { name: 'Label 1', isActive: true },
-  { name: 'Label 2', isActive: true },
-  { name: 'Label 3', isActive: false }
-]
 </script>
 
 <template>
@@ -22,14 +17,13 @@ const labels = [
 
         <div class="flex flex-col h-[calc(100vh-100px)] overflow-hidden hover:overflow-auto">
           <div
-            v-for="i in 8"
+            v-for="(note, i) in notes"
             :key="i"
             class="px-[30px] py-[10px] border-b border-gray-200 cursor-pointer hover:bg-neutral-1 transition-all duration-100"
           >
-            <h2 class="text-xl font-bold text-gray-800 mb-1">Daily Meeting {{ i }}</h2>
-            <p class="text-gray-500 max-h-[100px] overflow-hidden">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus odit doloremque
-              ea maxime asperiores ipsam nulla dolorum officia at nemo...
+            <h2 class="text-xl font-bold text-gray-800 mb-1 truncate">{{ note['title'] }}</h2>
+            <p class="text-gray-500 max-h-[95px] overflow-hidden">
+              {{ note['content'] }}
             </p>
           </div>
         </div>
