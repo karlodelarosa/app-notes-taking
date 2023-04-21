@@ -13,7 +13,7 @@ import SidebarMenu from '../molecules/menu/SidebarMenu.vue'
 
 <style scoped>
 .sidebar-panel {
-  @apply flex-none w-full md:max-w-xs bg-accent-1 text-white;
+  @apply flex-none w-full md:max-w-xs bg-accent-1 text-white fixed top-0 bottom-0 left-0 z-50;
 }
 
 .sidebar-app-name {

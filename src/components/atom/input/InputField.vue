@@ -5,7 +5,7 @@
     :placeholder="placeholder"
     :required="required"
     :disabled="disabled"
-    @input="updateValue($event);"
+    @input="updateValue($event)"
     class="w-full h-input px-[15px] placeholder:text-indigo-300 text-white rounded-custom-input bg-accent-1"
   />
 </template>
@@ -17,30 +17,30 @@ const updateInput = 'update:modelValue'
 export default defineComponent({
   props: {
     id: {
-      type: String,
+      type: String
     },
     type: {
-        type: String,
-        default: 'text'
+      type: String,
+      default: 'text'
     },
     placeholder: {
-        type: String,
-        default: 'Placeholder'
+      type: String,
+      default: 'Placeholder'
     },
     required: {
-        type: Boolean,
-        default: true
+      type: Boolean,
+      default: true
     },
     disabled: {
-        type: Boolean,
-        default: false
-    },
+      type: Boolean,
+      default: false
+    }
   },
   emits: [updateInput],
   setup(props: any, { emit }: any) {
     const updateValue = (event: any) => {
-      const target = event.target as HTMLInputElement;
-      emit(updateInput, target.value);
+      const target = event.target as HTMLInputElement
+      emit(updateInput, target.value)
     }
 
     return {
