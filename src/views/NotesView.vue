@@ -4,7 +4,6 @@ import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
 import TheNoteContainer from '@/components/template/TheNoteContainer.vue'
 import SearchField from '@/components/atom/input/SearchField.vue'
 import { notes } from '@/js/mock_data/sample_notes'
-
 </script>
 
 <template>
