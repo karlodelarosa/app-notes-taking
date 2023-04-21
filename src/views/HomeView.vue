@@ -8,7 +8,7 @@ import { notes } from '@/js/mock_data/sample_notes'
 const labels = [
   { name: 'Label 1', isActive: true },
   { name: 'Label 2', isActive: true },
-  { name: 'Label 3', isActive: false },
+  { name: 'Label 3', isActive: false }
 ]
 </script>
 
