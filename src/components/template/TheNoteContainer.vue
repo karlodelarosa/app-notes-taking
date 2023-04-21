@@ -1,6 +1,4 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="content-space">
@@ -10,6 +8,6 @@
 
 <style scoped>
 .content-space {
-  @apply pl-80 py-[75px];
+  @apply pl-80 pt-[75px];
 }
 </style>

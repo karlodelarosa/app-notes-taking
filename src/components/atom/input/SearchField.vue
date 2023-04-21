@@ -4,7 +4,7 @@ import SearchIcon from '@/components/atom/svg/SearchIcon.vue'
 
 <template>
   <div class="w-full ml-auto relative">
-    <input type="text" placeholder="Search notes" class="search-input">
+    <input type="text" placeholder="Search notes" class="search-input" />
     <SearchIcon class="absolute right-[13px] top-[11px]" />
   </div>
 </template>
