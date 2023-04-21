@@ -5,6 +5,17 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      xs: '375px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1440px',
+      'fhd': '1920px',
+      'qhd': '2560px',
+      'uhd': '3840px',
+    },
     extend: {
       colors: {
         'primary': '#524AAD',

@@ -14,8 +14,7 @@ const props = defineProps({
 
 const { text, status } = toRefs(props)
 
-const statusReactive = ref(false)
-
+const statusReactive = ref(status.value)
 watch(status, () => {
   statusReactive.value = status.value
 })
@@ -31,7 +30,7 @@ const toggleStatus = () => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .note-label {
   @apply w-fit px-[15px] py-1 rounded-full text-xs border-2 border-green-500 text-green-500 bg-white uppercase cursor-pointer hover:brightness-90 transition-all duration-100;
 }

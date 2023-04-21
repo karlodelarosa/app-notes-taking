@@ -37,6 +37,7 @@
 
 body {
   min-height: 100vh;
+  height: fit-content;
   color: black;
   background: #f4f6f8;
   transition: color 0.5s, background-color 0.5s;
