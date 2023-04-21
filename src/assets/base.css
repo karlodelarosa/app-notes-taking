@@ -15,7 +15,7 @@
 @font-face {
   font-family: 'montserrat';
   src: url('../../src/assets/fonts/Montserrat-Bold.ttf') format('truetype');
-  font-weight: 600;
+  font-weight: bold;
   font-style: normal;
 }
 
@@ -23,7 +23,7 @@
   font-family: 'montserrat';
   src: url('../../src/assets/fonts/Montserrat-ExtraBold.ttf') format('truetype');
   font-weight: 800;
-  font-style: normal;
+  font-style: bolder;
 }
 
 *,
