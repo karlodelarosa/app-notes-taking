@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SearchField from '../atom/input/SearchField.vue'
 defineProps({
   pageName: {
     type: String,
@@ -10,8 +11,11 @@ defineProps({
 <template>
   <div class="content-space">
     <div class="px-[50px]">
-      <header>
+      <header class="flex items-center justify-between mb-[20px]">
         <h1 class="page-title">{{ pageName }}</h1>
+        <div class="w-72">
+          <SearchField />
+        </div>
       </header>
       <slot></slot>
     </div>
@@ -23,6 +27,6 @@ defineProps({
   @apply pl-80 py-[110px];
 }
 .page-title {
-  @apply text-4xl font-bold uppercase text-gray-700 mb-[20px];
+  @apply text-4xl font-bold uppercase text-gray-700;
 }
 </style>
