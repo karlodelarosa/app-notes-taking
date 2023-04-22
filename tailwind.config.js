@@ -35,6 +35,7 @@ module.exports = {
       },
       height: {
         'button': '50px',
+        'button-sm': '40px',
         'input': '50px',
       }
     },

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useStore } from 'vuex'
 import CardNotes from '@/components/molecules/CardNotes.vue'
 import LabelTag from '@/components/atom/label/LabelTag.vue'
 import TheContainer from '@/components/template/TheContainer.vue'
-import SearchField from '@/components/atom/input/SearchField.vue'
+import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
+import CreateNoteModal from '@/components/organism/modal/CreateNoteModal.vue'
 import { notes } from '@/js/mock_data/sample_notes'
 
 const labels = [
@@ -10,21 +12,25 @@ const labels = [
   { name: 'Label 2', isActive: true },
   { name: 'Label 3', isActive: false }
 ]
+const store = useStore()
+const openModal = () => {
+  store.dispatch('modal/openModal')
+}
 </script>
 
 <template>
   <TheContainer page-name="Dashboard">
     <div class="filter-section">
-      <div class="flex-1">
-        <span class="font-bold text-xs tracking-wide">QUICK ACCESS:</span>
+      <div class="flex-1 w-full lg:w-40 lg:mr-auto">
+        <ButtonPrimary @click="openModal()" text="Add notes" size="sm" class="w-40" />
+      </div>
+
+      <div class="flex-1 ml-auto">
         <div class="flex flex-row gap-1 flex-wrap">
           <template v-for="(label, key) in labels" :key="key">
             <LabelTag :text="label.name" :status="label.isActive" />
           </template>
         </div>
-      </div>
-      <div class="flex-1 w-full lg:w-1/2 lg:ml-auto">
-        <SearchField />
       </div>
     </div>
 

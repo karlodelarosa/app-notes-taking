@@ -6,12 +6,13 @@
     :required="required"
     :disabled="disabled"
     @input="updateValue($event)"
-    class="w-full h-input px-[15px] placeholder:text-indigo-300 text-white rounded-custom-input bg-accent-1"
+    class="w-full h-input px-[15px] placeholder:text-indigo-300 rounded-custom-input border border-gray-300 outline-none"
+    :class="additionalClass"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 const updateInput = 'update:modelValue'
 
 export default defineComponent({
@@ -34,6 +35,10 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false
+    },
+    forSignIn: {
+      type: Boolean,
+      default: false
     }
   },
   emits: [updateInput],
@@ -42,9 +47,15 @@ export default defineComponent({
       const target = event.target as HTMLInputElement
       emit(updateInput, target.value)
     }
+    const additionalClass = ref('')
+
+    if(props.forSignIn) {
+      additionalClass.value = 'bg-accent-1 text-white'
+    }
 
     return {
-      updateValue
+      updateValue,
+      additionalClass
     }
   }
 })

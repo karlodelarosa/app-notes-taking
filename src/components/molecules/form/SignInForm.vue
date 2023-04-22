@@ -22,6 +22,7 @@ const signIn = () => {
       type="text"
       :required="true"
       v-model="username"
+      for-sign-in
     />
     <InputField
       id="password"
@@ -30,6 +31,7 @@ const signIn = () => {
       type="password"
       :required="true"
       v-model="password"
+      for-sign-in
     />
 
     <div class="py-[10px]">
