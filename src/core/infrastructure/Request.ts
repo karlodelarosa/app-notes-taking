@@ -5,6 +5,7 @@ import ApiRequest from './engine/ApiRequest'
 export default class Request extends ApiRequest {
   protected static apiUrl: string = import.meta.env.VITE_API_URL
   protected readonly insertVerb: string = 'add'
+  protected readonly updateVerb: string = 'add'
 
   constructor(module: string) {
     super(Request.apiUrl, module)
@@ -41,6 +42,24 @@ export default class Request extends ApiRequest {
     const requestUrl = `${this.getFullUrl()}/${this.insertVerb}`
     try {
       const { data } = await axios.post(requestUrl, params)
+      return new Promise((resolve) => {
+        resolve(data)
+      })
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error('Request.post axios err:', error)
+        throw error
+      } else {
+        console.error('Request.post unexpected err:', error)
+        throw error
+      }
+    }
+  }
+
+  async put(params: NoteFillable): Promise<any> {
+    const requestUrl = `${this.getFullUrl()}/:id`
+    try {
+      const { data } = await axios.put(requestUrl, params)
       return new Promise((resolve) => {
         resolve(data)
       })

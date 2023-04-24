@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, toRefs } from 'vue'
 
 const props = defineProps({
   text: {
@@ -9,6 +9,10 @@ const props = defineProps({
   size: {
     type: String,
     default: 'default'
+  },
+  editMode: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -25,7 +29,7 @@ switch (props.size) {
 
 <template>
   <button
-    class="w-full flex flex-row items-center justify-center gap-2 rounded-custom-button bg-primary text-white hover:brightness-95 transition-all duration-100"
+    class="w-full flex flex-row items-center bg-primary justify-center gap-2 rounded-custom-button text-white hover:brightness-95 transition-all duration-100"
     :class="additionalClass"
     type="submit"
   >

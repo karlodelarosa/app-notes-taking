@@ -1,5 +1,6 @@
+import * as _ from 'lodash'
 import Request from '@/core/infrastructure/Request'
-import type { NoteFillable } from '@/core/domain/contract/Notes.types'
+import type { NoteFillable, AllNotes } from '@/core/domain/contract/Notes.types'
 
 export default class NotesService extends Request {
   protected static module: string = 'note'
@@ -11,12 +12,12 @@ export default class NotesService extends Request {
   }
 
   setTitle(title: string): this {
-    this.title = title
+    this.title = _.escape(title)
     return this
   }
 
   setContent(content: string): this {
-    this.content = content
+    this.content = _.escape(content)
     return this
   }
 
@@ -34,5 +35,14 @@ export default class NotesService extends Request {
       content: this.content
     }
     return await this.post(params)
+  }
+
+  async update(id: string | number) {
+    const params: AllNotes = {
+      id: id,
+      title: this.title,
+      content: this.content
+    }
+    return await this.put(params)
   }
 }
