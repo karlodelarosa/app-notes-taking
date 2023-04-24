@@ -2,59 +2,64 @@
 import * as _ from 'lodash'
 import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
-import ButtonDefault from '../atom/button/ButtonDefault.vue'
 import ButtonPrimary from '../atom/button/ButtonPrimary.vue'
+import LabelTagStatic from '../atom/label/LabelTagStatic.vue'
 import NotesService from '@/core/application/notes/NotesService'
+
+import NoteLabelCollection from '@/core/application/NoteLabelCollection'
+
+const noteLabelCollection = new NoteLabelCollection()
 
 const store = useStore()
 const selectedNote = computed(() => store.getters['notes/GET_selectedNote'])
 const selectedNoteKey = ref(0)
 const title = ref('')
 const content = ref('')
+const noteLabel = ref()
 
 const notes = new NotesService()
 const getItems = (() => {
-  notes.fetchAll().then(async (result) => {
+  noteLabelCollection.buildData().then(async (result) => {
     await store.dispatch('notes/setNotes', result)
     selectedNoteKey.value = selectedNote.value.id
     title.value = _.unescape(selectedNote.value.title)
     content.value = _.unescape(selectedNote.value.content)
+    noteLabel.value = selectedNote.value.labels
   })
 })
 
 getItems()
 
+const focusInput = () => {
+  setTimeout(() => {
+    titleInput.value?.focus()
+  }, 100)
+}
+
 watch(selectedNote, () => {
   selectedNoteKey.value = selectedNote.value.id
   title.value = _.unescape(selectedNote.value.title)
   content.value = _.unescape(selectedNote.value.content)
+  noteLabel.value = selectedNote.value.labels
+  focusInput()
 })
 
 const titleInput = ref<HTMLInputElement | null>(null)
+const editMode = ref(true)
 
-const editMode = ref(false)
-const editButtonText = ref('Start Editing')
-const toggleEdit = () => {
-  
-  editButtonText.value = 'Save Changes'
-  setTimeout(() => {
-    titleInput.value?.focus()
-  }, 100)
-  
+const updateNote = () => {
+  focusInput()
   if (editMode.value) {
     notes
       .setTitle(title.value)
       .setContent(content.value)
       .update(selectedNoteKey.value)
       .then(result => {
-        console.info(result)
-        editButtonText.value = 'Start Editing'
         getItems()
       })
   }
-
-  editMode.value = !editMode.value
 }
+
 </script>
 
 <template>
@@ -73,7 +78,14 @@ const toggleEdit = () => {
           />
         </div>
 
-        <div class="py-[40px] px-[100px] min-h-[400px] text-gray-700">
+        <div class="py-[20px] px-[100px] min-h-[400px] text-gray-700">
+          <div class="flex flex-row gap-1 flex-wrap mb-[30px]">
+            <input type="text" placeholder="Add tags" class="bg-transparent outline-none">
+            <template v-for="(item, key) in noteLabel" :key="key">
+              <LabelTagStatic :text="item.label" />
+            </template>
+            
+          </div>
           <textarea
             v-model="content"
             :disabled="!editMode"
@@ -81,14 +93,14 @@ const toggleEdit = () => {
             placeholder="Add text here"
             rows="15"
             maxlength="300"
-            class="w-full text-gray-600 outline-none resize-none mb-3 bg-transparent"
+            class="w-full text-lg text-gray-600 outline-none resize-none mb-3 bg-transparent"
           ></textarea>  
         </div>
       </div>
 
       <div class="col-span-3 flex flex-col gap-2">
-        <ButtonPrimary @click="toggleEdit()" :text="editButtonText" :edit-mode="editMode" />
-        <ButtonDefault />
+        <ButtonPrimary @click="updateNote()" text="Save Changes" :edit-mode="editMode" />
+        <!-- <ButtonDefault /> -->
       </div>
     </div>
   </div>
