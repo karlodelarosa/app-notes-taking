@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import CardNotes from '@/components/molecules/CardNotes.vue'
 import LabelTag from '@/components/atom/label/LabelTag.vue'
@@ -12,17 +12,17 @@ const labels = [
   { name: 'Label 2', isActive: true },
   { name: 'Label 3', isActive: false }
 ]
+
 const store = useStore()
 const openModal = () => {
   store.dispatch('modal/openModal')
 }
 
-const allNotes = ref({})
+const allNotes = computed(() => store.getters['notes/GET_allNotes'])
 const notes = new NotesService()
 
-notes.fetchAll()
-.then(result => {
-  allNotes.value = result
+notes.fetchAll().then((result) => {
+  store.dispatch('notes/setNotes', result)
 })
 </script>
 

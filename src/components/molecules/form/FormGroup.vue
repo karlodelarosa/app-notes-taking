@@ -5,6 +5,6 @@ import InputField from '@/components/atom/input/InputField.vue'
 <template>
   <div class="flex flex-col gap-3">
     <label class="font-bold">Application Name</label>
-    <InputField/>
+    <InputField />
   </div>
 </template>

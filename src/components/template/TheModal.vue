@@ -7,7 +7,7 @@ const store = useStore()
 const isOpen = computed(() => store.getters['modal/GET_isOpen'])
 </script>
 <template>
-  <div v-if="isOpen" class="modal-wrapper">
+  <div v-show="isOpen" class="modal-wrapper">
     <KeepAlive>
       <component :is="CreateNoteModal"></component>
     </KeepAlive>
