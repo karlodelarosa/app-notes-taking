@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 import CardNotes from '@/components/molecules/CardNotes.vue'
 import LabelTag from '@/components/atom/label/LabelTag.vue'
 import TheContainer from '@/components/template/TheContainer.vue'
 import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
-import CreateNoteModal from '@/components/organism/modal/CreateNoteModal.vue'
-import { notes } from '@/js/mock_data/sample_notes'
+import NotesService from '@/core/application/notes/NotesService'
 
 const labels = [
   { name: 'Label 1', isActive: true },
@@ -16,6 +16,14 @@ const store = useStore()
 const openModal = () => {
   store.dispatch('modal/openModal')
 }
+
+const allNotes = ref({})
+const notes = new NotesService()
+
+notes.fetchAll()
+.then(result => {
+  allNotes.value = result
+})
 </script>
 
 <template>
@@ -35,7 +43,7 @@ const openModal = () => {
     </div>
 
     <div class="card-section">
-      <CardNotes :notes="notes" />
+      <CardNotes :notes="allNotes" />
     </div>
   </TheContainer>
 </template>
