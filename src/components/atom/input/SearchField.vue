@@ -11,7 +11,7 @@ const allData = computed(() => store.getters['notes/GET_allNotes'])
 const selectedLabel = computed(() => store.getters['label/GET_labels'])
 
 const searchText = ref('')
-const activeLabel = ref()
+const activeLabel = ref([])
 
 const searchArticle = () => {
   filterArticle(searchText.value)
