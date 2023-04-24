@@ -8,6 +8,7 @@ import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
 import NotesService from '@/core/application/notes/NotesService'
 import NoteLabelCollection from '@/core/application/NoteLabelCollection'
 import LabelService from '@/core/application/labels/LabelService'
+import SearchNote from '@/core/application/SearchNote'
 
 const labels = ref()
 
@@ -17,6 +18,7 @@ const openModal = () => {
 }
 
 const allNotes = computed(() => store.getters['notes/GET_allNotes'])
+const searchKeyword = computed(() => store.getters['notes/GET_searchKeyword'])
 const collection = new NoteLabelCollection()
 const labelService = new LabelService()
 const notesService = new NotesService()
@@ -42,11 +44,24 @@ const labelIds = new Array()
 const filterByLabel = (labelId: number) => {
   toggleArray(labelId)
 
-  if (labelIds.length <= 0) {
-    runCollection()
-  } else {
-    runCollectionByLabelId()
+  store.dispatch('label/setLabels', labelIds)
+
+  if (searchKeyword.value <= 0) {
+    if (labelIds.length <= 0) {
+      runCollection()
+    } else {
+      runCollectionByLabelId()
+    }
   }
+
+  const searchNote = new SearchNote()
+    .setKeyword(searchKeyword.value)
+    .setLabel(labelId)
+    .setAllData(allNotes.value)
+    .filter()
+  
+    store.dispatch('notes/setNotes', searchNote)
+  
   // setTimeout(() => {
   //   runCollectionByLabelId()
   // }, 500)

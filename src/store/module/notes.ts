@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 const state = () => ({
     notes: {},
-    selectedNote: 0
+    selectedNote: 0,
+    searchKeyword: ''
   })
   
   const actions = {
@@ -10,7 +11,10 @@ const state = () => ({
     },
     setSelectedNote({ commit }: any, data: number) {
       commit('SET_SELECTED_NOTE', data)
-    }
+    },
+    setSearchKeyword({ commit }: any, data: string) {
+      commit('SET_SEARCH_KEYWORD', data)
+    },
   }
   
   const mutations = {
@@ -19,11 +23,15 @@ const state = () => ({
     },
     SET_SELECTED_NOTE(state: { selectedNote: number }, payload: number) {
       state.selectedNote = payload
+    },
+    SET_SEARCH_KEYWORD(state: { searchKeyword: string }, payload: string) {
+      state.searchKeyword = payload
     }
   }
   
   const getters = {
     GET_allNotes: (state: { notes: object }) => state.notes,
+    GET_searchKeyword: (state: { searchKeyword: string }) => state.searchKeyword,
     GET_allNoteKey: (state: { selectedNote: number }) => state.selectedNote,
     GET_selectedNoteTitle: (state: any ) => {
       return state.notes[state.selectedNote].title
