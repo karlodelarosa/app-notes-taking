@@ -51,7 +51,7 @@ const signIn = () => {
     <InputField
       id="username"
       inputName="username"
-      placeholder="Input any username"
+      placeholder="Input name"
       type="text"
       :required="true"
       v-model="username"
@@ -61,7 +61,7 @@ const signIn = () => {
     <InputField
       id="password"
       inputName="password"
-      placeholder="Input any password"
+      placeholder="Input password"
       type="password"
       :required="true"
       v-model="password"
