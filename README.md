@@ -15,6 +15,8 @@ API
 https://github.com/karlodelarosa/api-notes-taking.git
 ```
 
+Access [Figma](https://www.figma.com/file/iSLN2hDWwBgaGzxZNym7JW/note-taking?node-id=1-2&t=FteJvnb524Ln5qzF-0)
+
 ---
 ### Steps:
 - Install Docker to access local database
