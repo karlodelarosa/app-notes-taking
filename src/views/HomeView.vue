@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import CardNotes from '@/components/molecules/CardNotes.vue'
 import LabelTag from '@/components/atom/label/LabelTag.vue'
 import TheContainer from '@/components/template/TheContainer.vue'
@@ -9,6 +10,12 @@ import NotesService from '@/core/application/notes/NotesService'
 import NoteLabelCollection from '@/core/application/NoteLabelCollection'
 import LabelService from '@/core/application/labels/LabelService'
 import SearchNote from '@/core/application/SearchNote'
+
+const router = useRouter()
+const auth = sessionStorage.getItem("auth")
+if (auth === null) {
+  router.push('/sign-in')
+}
 
 const labels = ref()
 
