@@ -21,6 +21,24 @@ export default class Request extends ApiRequest {
     )
   }
 
+  async authenticate(params: any): Promise<any> {
+    const requestUrl = `${this.getFullUrl()}/auth`
+    try {
+      const { data } = await axios.post(requestUrl, params)
+      return new Promise((resolve) => {
+        resolve(data)
+      })
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error('Request.get axios err:', error)
+        throw error
+      } else {
+        console.error('Request.get unexpected err:', error)
+        throw error
+      }
+    }
+  }
+
   async get(params: TableId = { id: '' }): Promise<any> {
     const requestUrl = `${this.getFullUrl()}/${params.id}`
     try {
