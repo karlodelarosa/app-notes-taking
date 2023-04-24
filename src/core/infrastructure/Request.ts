@@ -73,4 +73,27 @@ export default class Request extends ApiRequest {
       }
     }
   }
+
+  async delete(params: NoteId): Promise<any> {
+    const requestUrl = `${this.getFullUrl()}${params.id}`
+    try {
+      const { data } = await axios.delete(requestUrl, {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN_SECRET}`,
+        },
+        data: params.id,
+      })
+      return new Promise((resolve) => {
+        resolve(data)
+      })
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error('Request.post axios err:', error)
+        throw error
+      } else {
+        console.error('Request.post unexpected err:', error)
+        throw error
+      }
+    }
+  }
 }

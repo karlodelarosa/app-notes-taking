@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 import Request from '@/core/infrastructure/Request'
-import type { NoteFillable, AllNotes } from '@/core/domain/contract/Notes.types'
+import type { NoteId, NoteFillable, AllNotes } from '@/core/domain/contract/Notes.types'
 
 export default class NotesService extends Request {
   protected static module: string = 'note'
@@ -44,5 +44,12 @@ export default class NotesService extends Request {
       content: this.content
     }
     return await this.put(params)
+  }
+  
+  async remove(id: string | number) {
+    const params: NoteId = {
+      id: id
+    }
+    return await this.delete(params)
   }
 }
