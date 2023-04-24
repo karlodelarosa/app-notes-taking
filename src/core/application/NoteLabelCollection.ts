@@ -18,14 +18,30 @@ export default class NoteLabelCollection {
     notes.map((note: any, key: any) => {
       const noteId = note.id
       notes[key].labels = []
-      labels.map((label: any, labelKey: any) => {
+      labels.map((label: any) => {
         if (label.note_id === noteId) {
           notes[key].labels.push(label)
         }
       })
     })
 
+    return notes
+  }
 
+  async buildByLabelId(labelIds: any) {
+    const notes = await this.notesService.fetchByLabelIds(labelIds)
+    const labels = await this.labelsService.getNoteLabels()
+
+    notes.map((note: any, key: any) => {
+      const noteId = note.id
+      notes[key].labels = []
+      labels.map((label: any) => {
+        if (label.note_id === noteId) {
+          notes[key].labels.push(label)
+        }
+      })
+    })
+    
     return notes
   }
 }

@@ -21,12 +21,17 @@ export default class NotesService extends Request {
     return this
   }
 
+  async fetchAll() {
+    return await this.get()
+  }
+
   async fetchById(id: string | number) {
     return await this.get({ id: id })
   }
 
-  async fetchAll() {
-    return await this.get()
+  async fetchByLabelIds(ids: []) {
+    const url = `${import.meta.env.VITE_API_URL}/${this.module}/label`
+    return await this.getByUrl(url ,{ id: ids })
   }
 
   async insert() {

@@ -17,4 +17,8 @@ export default class LabelsService extends Request {
     const url = `${import.meta.env.VITE_API_URL}/${this.module}/note`
     return await this.getByUrl(url)
   }
+
+  async fetchAll() {
+    return await this.get()
+  }
 }

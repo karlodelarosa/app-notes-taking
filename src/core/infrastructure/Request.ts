@@ -39,7 +39,7 @@ export default class Request extends ApiRequest {
     }
   }
 
-  async getByUrl(url: string, params: TableId = { id: '' }): Promise<any> {
+  async getByUrl(url: string, params: any = { id: '' }): Promise<any> {
     const requestUrl = `${url}/${params.id}`
     try {
       const { data } = await axios.get(requestUrl)

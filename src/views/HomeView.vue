@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import CardNotes from '@/components/molecules/CardNotes.vue'
 import LabelTag from '@/components/atom/label/LabelTag.vue'
 import TheContainer from '@/components/template/TheContainer.vue'
 import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
 import NotesService from '@/core/application/notes/NotesService'
+import NoteLabelCollection from '@/core/application/NoteLabelCollection'
+import LabelService from '@/core/application/labels/LabelService'
 
-const labels = [
-  { name: 'Label 1', isActive: true },
-  { name: 'Label 2', isActive: true },
-  { name: 'Label 3', isActive: false }
-]
+const labels = ref()
 
 const store = useStore()
 const openModal = () => {
@@ -19,11 +17,48 @@ const openModal = () => {
 }
 
 const allNotes = computed(() => store.getters['notes/GET_allNotes'])
-const notes = new NotesService()
+const collection = new NoteLabelCollection()
+const labelService = new LabelService()
+const notesService = new NotesService()
 
-notes.fetchAll().then((result) => {
-  store.dispatch('notes/setNotes', result)
+const runCollection = () => {
+  collection.buildData().then((result) => {
+    store.dispatch('notes/setNotes', result)
+  })
+}
+runCollection()
+
+const runCollectionByLabelId = () => {
+  collection.buildByLabelId(labelIds).then((result) => {
+    store.dispatch('notes/setNotes', result)
+  })
+}
+
+labelService.fetchAll().then((result) => {
+  labels.value = result
 })
+
+const labelIds = new Array()
+const filterByLabel = (labelId: number) => {
+  toggleArray(labelId)
+
+  if (labelIds.length <= 0) {
+    runCollection()
+  } else {
+    runCollectionByLabelId()
+  }
+  // setTimeout(() => {
+  //   runCollectionByLabelId()
+  // }, 500)
+}
+
+const toggleArray = (labelId: number) => {
+  if (!labelIds.includes(labelId)) {
+    labelIds.push(labelId)
+  } else {
+    labelIds.splice(labelIds.indexOf(labelId), 1);
+  }
+}
 </script>
 
 <template>
@@ -36,7 +71,7 @@ notes.fetchAll().then((result) => {
       <div class="flex-1 ml-auto">
         <div class="flex flex-row gap-1 flex-wrap">
           <template v-for="(label, key) in labels" :key="key">
-            <LabelTag :text="label.name" :status="label.isActive" />
+            <LabelTag @click="filterByLabel(label.id)" :text="label.name" :status="label.isActive" />
           </template>
         </div>
       </div>
