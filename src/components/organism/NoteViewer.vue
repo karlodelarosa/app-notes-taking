@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as _ from 'lodash'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import ButtonDefault from '../atom/button/ButtonDefault.vue'
 import ButtonPrimary from '../atom/button/ButtonPrimary.vue'
@@ -23,6 +23,12 @@ const getItems = (() => {
 })
 
 getItems()
+
+watch(selectedNote, () => {
+  selectedNoteKey.value = selectedNote.value.id
+  title.value = _.unescape(selectedNote.value.title)
+  content.value = _.unescape(selectedNote.value.content)
+})
 
 const titleInput = ref<HTMLInputElement | null>(null)
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as _ from 'lodash'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import DeleteIcon from '../atom/svg/DeleteIcon.vue'
 import EditIcon from '../atom/svg/EditIcon.vue'
 import LabelTagStatic from '../atom/label/LabelTagStatic.vue'
@@ -11,6 +12,7 @@ defineProps<{
 }>()
 
 const store = useStore()
+const router = useRouter()
 
 const note = new NotesService()
 const deleteNote = async (id: string | number) => {
@@ -19,12 +21,17 @@ const deleteNote = async (id: string | number) => {
     store.dispatch('notes/setNotes', result)
   })
 }
+
+const initEdit = (id: string | number) => {
+  store.dispatch('notes/setSelectedNote', id)
+  router.push('notes')
+}
 </script>
 <template>
-  <TransitionGroup name="fade" mode="out-in">
+  <TransitionGroup name="fade" >
     <div v-for="(note, key) in notes" :key="key" class="bg-white rounded-custom-card shadow-xl">
       <div class="px-5 pt-5">
-        <EditIcon class="ml-auto hover:brightness-75 cursor-pointer active:scale-95" />
+        <EditIcon @click="initEdit(key)" class="ml-auto hover:brightness-75 cursor-pointer active:scale-95" />
       </div>
       <div class="px-5 py-2">
         <h1 class="w-full truncate text-3xl font-bold text-gray-700 mb-3">{{ _.unescape(note['title']) }}</h1>
