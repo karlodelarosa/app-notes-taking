@@ -20,8 +20,7 @@ const openModal = () => {
 const allNotes = ref({})
 const notes = new NotesService()
 
-notes.fetchAll()
-.then(result => {
+notes.fetchAll().then((result) => {
   allNotes.value = result
 })
 </script>

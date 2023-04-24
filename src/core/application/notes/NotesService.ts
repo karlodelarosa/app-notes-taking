@@ -1,10 +1,9 @@
-import Request from "@/core/infrastructure/Request"
-import type { NoteFillable } from "@/core/domain/contract/Notes.types"
-
+import Request from '@/core/infrastructure/Request'
+import type { NoteFillable } from '@/core/domain/contract/Notes.types'
 
 export default class NotesService extends Request {
   protected static module: string = 'note'
-  protected title: string =''
+  protected title: string = ''
   protected content: string = ''
 
   constructor() {
@@ -31,8 +30,8 @@ export default class NotesService extends Request {
 
   async insert() {
     const params: NoteFillable = {
-        title: this.title,
-        content: this.content
+      title: this.title,
+      content: this.content
     }
     return await this.post(params)
   }

@@ -49,7 +49,7 @@ export default defineComponent({
     }
     const additionalClass = ref('')
 
-    if(props.forSignIn) {
+    if (props.forSignIn) {
       additionalClass.value = 'bg-accent-1 text-white'
     }
 

@@ -12,22 +12,22 @@ const actions = {
     commit('SET_IS_OPEN', false)
   },
   setActiveModal({ commit }: any, data: string) {
-      commit('SET_ACTIVE_MODAL', data)
+    commit('SET_ACTIVE_MODAL', data)
   }
 }
 
 const mutations = {
-  SET_IS_OPEN(state: { isOpen: boolean; }, payload: boolean) {
-      state.isOpen = payload
+  SET_IS_OPEN(state: { isOpen: boolean }, payload: boolean) {
+    state.isOpen = payload
   },
-  SET_ACTIVE_MODAL(state: { activeModal: string; }, payload: string) {
+  SET_ACTIVE_MODAL(state: { activeModal: string }, payload: string) {
     state.activeModal = payload
-}
+  }
 }
 
 const getters = {
-  GET_isOpen: (state: { isOpen: boolean; }) => state.isOpen,
-  GET_activeModal: (state: { activeModal: string; }) => state.activeModal
+  GET_isOpen: (state: { isOpen: boolean }) => state.isOpen,
+  GET_activeModal: (state: { activeModal: string }) => state.activeModal
 }
 
 export default {
@@ -35,5 +35,5 @@ export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 }

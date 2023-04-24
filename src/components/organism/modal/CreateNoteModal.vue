@@ -17,22 +17,32 @@ const content = ref('')
 
 const notes = new NotesService()
 const saveNote = () => {
-  notes
-  .setTitle(title.value)
-  .setContent(content.value)
-  .insert()
+  notes.setTitle(title.value).setContent(content.value).insert()
 }
-
 </script>
 <template>
   <div class="w-2/5 bg-white rounded-custom-modal py-[30px] relative">
-    <CloseIcon @click="closeModal()" class="absolute right-[10px] top-[10px] active:scale-95 cursor-pointer" />
+    <CloseIcon
+      @click="closeModal()"
+      class="absolute right-[10px] top-[10px] active:scale-95 cursor-pointer"
+    />
     <div class="border-b border-gray-200 px-[30px] mb-8">
-      <input v-model="title" type="text" class="w-full outline-none font-bold text-4xl mb-[20px]" placeholder="Add title..">
+      <input
+        v-model="title"
+        type="text"
+        class="w-full outline-none font-bold text-4xl mb-[20px]"
+        placeholder="Add title.."
+      />
     </div>
 
     <div class="px-[50px] mb-8">
-      <textarea v-model="content" name="Content" placeholder="Add text here" rows="10" class="w-full text-xl text-gray-600 outline-none resize-none mb-3"></textarea>
+      <textarea
+        v-model="content"
+        name="Content"
+        placeholder="Add text here"
+        rows="10"
+        class="w-full text-xl text-gray-600 outline-none resize-none mb-3"
+      ></textarea>
       <div class="text-right text-gray-500">0/1000</div>
     </div>
 

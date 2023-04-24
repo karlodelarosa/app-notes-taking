@@ -15,7 +15,7 @@ import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
         <form>
           <div class="flex flex-col gap-3 w-72 mb-5">
             <label class="font-bold">Application Name</label>
-            <InputField placeholder="Application name"/>
+            <InputField placeholder="Application name" />
           </div>
           <ButtonPrimary :text="'Save changes'" :btn-size="'xxxx'" class="w-40" />
         </form>
