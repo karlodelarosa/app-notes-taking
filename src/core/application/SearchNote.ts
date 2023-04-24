@@ -34,28 +34,9 @@ export default class SearchNote {
             if (keywordsMatched) {
                 return allData[key]
             }
-
-            // const labelFromData = _.get(data, 'labels')
-            // labelFromData.map((result: any) => {
-            //     if (label.includes(result.label_id)) {
-            //         // console.info(key)
-            //     }
-            // })
-            
-            // if (categoryId === 'all') {
-            //     if (keywordsMatched) {
-            //         return articles[key]
-            //     }
-            // } else {
-            //     if (categoryMatched && keywordsMatched) {
-            //         return articles[key]
-            //     }
-            // }
-
             return null
         }).filter(Boolean)
-
-        // console.info(filtered)
+        
         return filtered
     }
 }
