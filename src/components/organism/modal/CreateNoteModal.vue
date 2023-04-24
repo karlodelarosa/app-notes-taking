@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useStore } from 'vuex'
 import CloseIcon from '@/components/atom/svg/CloseIcon.vue'
 import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
@@ -11,6 +11,8 @@ const store = useStore()
 const closeModal = () => {
   store.dispatch('modal/closeModal')
 }
+
+const activeModal = computed(() => store.getters['modal/GET_activeModal'])
 
 const contentLength = ref(0)
 const maxContentLength = ref(300)

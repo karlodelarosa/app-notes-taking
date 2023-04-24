@@ -9,6 +9,6 @@ export default class ApiRequest {
   }
 
   protected getFullUrl(): string {
-    return `${this.url}/${this.module}/`
+    return `${this.url}/${this.module}`
   }
 }

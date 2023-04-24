@@ -2,15 +2,23 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import NotesService from '@/core/application/notes/NotesService'
+import NoteLabelCollection from '@/core/application/NoteLabelCollection'
+
 
 const store = useStore()
 const allNotes = computed(() => store.getters['notes/GET_allNotes'])
 const selectedNote = computed(() => store.getters['notes/GET_allNoteKey'])
 
-const notes = new NotesService()
-notes.fetchAll().then((result) => {
+const collection = new NoteLabelCollection()
+collection.buildData().then((result) => {
   store.dispatch('notes/setNotes', result)
 })
+
+
+// const notes = new NotesService()
+// notes.fetchAll().then((result) => {
+//   store.dispatch('notes/setNotes', result)
+// })
 
 const forEdit = (key: number) => {
   store.dispatch('notes/setSelectedNote', key)
