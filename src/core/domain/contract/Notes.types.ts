@@ -7,6 +7,4 @@ export interface NoteFillable {
   content: string
 }
 
-export interface AllNotes extends NoteId, NoteFillable {
-
-}
+export interface AllNotes extends NoteId, NoteFillable { }
