@@ -112,7 +112,7 @@ export default class Request extends ApiRequest {
   }
 
   async delete(params: NoteId): Promise<any> {
-    const requestUrl = `${this.getFullUrl()}${params.id}`
+    const requestUrl = `${this.getFullUrl()}/${params.id}`
     try {
       const { data } = await axios.delete(requestUrl, {
         headers: {

@@ -2,7 +2,8 @@
 const state = () => ({
     notes: {},
     selectedNote: 0,
-    searchKeyword: ''
+    searchKeyword: '',
+    deleteId: null
   })
   
   const actions = {
@@ -15,6 +16,9 @@ const state = () => ({
     setSearchKeyword({ commit }: any, data: string) {
       commit('SET_SEARCH_KEYWORD', data)
     },
+    setDeleteId({ commit }: any, data: any) {
+      commit('SET_DELETE_ID', data)
+    },
   }
   
   const mutations = {
@@ -26,6 +30,9 @@ const state = () => ({
     },
     SET_SEARCH_KEYWORD(state: { searchKeyword: string }, payload: string) {
       state.searchKeyword = payload
+    },
+    SET_DELETE_ID(state: { deleteId: any }, payload: any) {
+      state.deleteId = payload
     }
   }
   
@@ -42,6 +49,7 @@ const state = () => ({
     GET_selectedNote: (state: any) => {
       return state.notes[state.selectedNote]
     },
+    GET_deleteId: (state: { deleteId: string }) => state.deleteId,
   }
   
   export default {

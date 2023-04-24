@@ -13,8 +13,8 @@ import SearchNote from '@/core/application/SearchNote'
 const labels = ref()
 
 const store = useStore()
-const openModal = () => {
-  store.dispatch('modal/openModal')
+const openModal = (modal: string) => {
+  store.dispatch('modal/openModal', modal)
 }
 
 const allNotes = computed(() => store.getters['notes/GET_allNotes'])
@@ -80,7 +80,7 @@ const toggleArray = (labelId: number) => {
   <TheContainer page-name="Dashboard">
     <div class="filter-section">
       <div class="flex-1 w-full lg:w-40 lg:mr-auto">
-        <ButtonPrimary @click="openModal()" text="Add notes" size="sm" class="w-40" />
+        <ButtonPrimary @click="openModal('create')" text="Add notes" size="sm" class="w-40" />
       </div>
 
       <div class="flex-1 ml-auto">

@@ -5,8 +5,9 @@ const state = () => ({
 })
 
 const actions = {
-  openModal({ commit }: any) {
+  openModal({ commit }: any, activeModal: string) {
     commit('SET_IS_OPEN', true)
+    commit('SET_ACTIVE_MODAL', activeModal)
   },
   closeModal({ commit }: any) {
     commit('SET_IS_OPEN', false)

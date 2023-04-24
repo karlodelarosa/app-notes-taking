@@ -2,14 +2,22 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import CreateNoteModal from '@/components/organism/modal/CreateNoteModal.vue'
+import DeleteNoteModal from '@/components/organism/modal/DeleteNoteModal.vue'
 
 const store = useStore()
 const isOpen = computed(() => store.getters['modal/GET_isOpen'])
+const activeModal = computed(() => store.getters['modal/GET_activeModal'])
+
+
 </script>
 <template>
   <div v-show="isOpen" class="modal-wrapper">
     <KeepAlive>
-      <component :is="CreateNoteModal"></component>
+      <CreateNoteModal v-if="activeModal === 'create'" />
+    </KeepAlive>
+
+    <KeepAlive>
+      <DeleteNoteModal v-if="activeModal === 'delete'" />
     </KeepAlive>
   </div>
 </template>

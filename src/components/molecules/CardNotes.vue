@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import * as _ from 'lodash'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import DeleteIcon from '../atom/svg/DeleteIcon.vue'
 import EditIcon from '../atom/svg/EditIcon.vue'
 import LabelTagStatic from '../atom/label/LabelTagStatic.vue'
 import NotesService from '@/core/application/notes/NotesService'
+import NoteLabelCollection from '@/core/application/NoteLabelCollection'
+import SearchNote from '@/core/application/SearchNote'
 
 defineProps<{
   notes?: object
@@ -13,13 +16,38 @@ defineProps<{
 
 const store = useStore()
 const router = useRouter()
+const collection = new NoteLabelCollection()
+
+const allNotes = computed(() => store.getters['notes/GET_allNotes'])
+const searchKeyword = computed(() => store.getters['notes/GET_searchKeyword'])
+const selectedLabel = computed(() => store.getters['label/GET_labels'])
 
 const note = new NotesService()
 const deleteNote = async (id: string | number) => {
-  await note.remove(id)
-  note.fetchAll().then((result) => {
-    store.dispatch('notes/setNotes', result)
-  })
+  store.dispatch('modal/openModal', 'delete')
+  store.dispatch('notes/setDeleteId', id)
+
+  // await note.remove(id)
+  
+  // if(searchKeyword.value.length <= 0) {
+  //   if (selectedLabel.value.length > 0) {
+  //     collection.buildByLabelId(selectedLabel.value).then((result) => {
+  //       store.dispatch('notes/setNotes', result)
+  //     })
+  //   } else {
+  //     collection.buildData().then((result) => {
+  //       store.dispatch('notes/setNotes', result)
+  //     })
+  //   }
+  // }
+
+  // const searchNote = new SearchNote()
+  //   .setKeyword(searchKeyword.value)
+  //   .setLabel(selectedLabel.value)
+  //   .setAllData(allNotes.value)
+  //   .filter()
+  
+  //   store.dispatch('notes/setNotes', searchNote)
 }
 
 const initEdit = (id: string | number) => {
