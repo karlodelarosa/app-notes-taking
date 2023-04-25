@@ -13,6 +13,10 @@ const props = defineProps({
   editMode: {
     type: Boolean,
     default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -29,8 +33,9 @@ switch (props.size) {
 
 <template>
   <button
-    class="w-full flex flex-row items-center bg-primary justify-center gap-2 rounded-custom-button text-white hover:brightness-95 transition-all duration-100"
+    class="btn-primary"
     :class="additionalClass"
+    :disabled="disabled"
     type="submit"
   >
     <slot name="icon"></slot>

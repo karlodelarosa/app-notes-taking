@@ -8,20 +8,19 @@ import NoteLabelCollection from '@/core/application/NoteLabelCollection'
 const store = useStore()
 const allNotes = computed(() => store.getters['notes/GET_allNotes'])
 const selectedNote = computed(() => store.getters['notes/GET_allNoteKey'])
+const selectedLabel = computed(() => store.getters['label/GET_selectedLabels'])
 
 const collection = new NoteLabelCollection()
 collection.buildData().then((result) => {
   store.dispatch('notes/setNotes', result)
 })
 
-
-// const notes = new NotesService()
-// notes.fetchAll().then((result) => {
-//   store.dispatch('notes/setNotes', result)
-// })
-
 const forEdit = (key: number) => {
+  const newArray = allNotes.value[key].labels.map((data: any) => {
+    return { id: data.label_id, name: data.label }
+  })
   store.dispatch('notes/setSelectedNote', key)
+  store.dispatch('label/setSelectedLabels', new Set(newArray))
 }
 </script>
 

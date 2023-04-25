@@ -1,11 +1,13 @@
 import * as _ from 'lodash'
+import store from '@/store/index'
 import Request from '@/core/infrastructure/Request'
-import type { NoteId, NoteFillable, AllNotes } from '@/core/domain/contract/Notes.types'
+import type { NoteId, AllNotesWithLabelIds, NotesWithLabel } from '@/core/domain/contract/Notes.types'
 
 export default class NotesService extends Request {
   protected static module: string = 'note'
   protected title: string = ''
   protected content: string = ''
+  protected labels: any = []
 
   constructor() {
     super(NotesService.module)
@@ -18,6 +20,11 @@ export default class NotesService extends Request {
 
   setContent(content: string): this {
     this.content = _.escape(content)
+    return this
+  }
+
+  setLabels(labels: any[]): this {
+    this.labels = labels
     return this
   }
 
@@ -35,18 +42,24 @@ export default class NotesService extends Request {
   }
 
   async insert() {
-    const params: NoteFillable = {
+    const params: NotesWithLabel = {
       title: this.title,
-      content: this.content
+      content: this.content,
+      labelIds: this.labels
     }
     return await this.post(params)
   }
 
   async update(id: string | number) {
-    const params: AllNotes = {
+    const copy = [...this.labels.values()]
+    const toIds = copy.map((label: any) => {
+      return label.id
+    })
+    const params: any = {
       id: id,
       title: this.title,
-      content: this.content
+      content: this.content,
+      labelIds: toIds
     }
     return await this.put(params)
   }
