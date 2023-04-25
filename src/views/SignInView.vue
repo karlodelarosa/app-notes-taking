@@ -6,7 +6,7 @@ import SignInTextContent from '@/components/molecules/text_group/SignInTextConte
 import TopWave from '@/components/atom/svg/TopWave.vue'
 
 const router = useRouter()
-const auth = sessionStorage.getItem("auth")
+const auth = sessionStorage.getItem('auth')
 if (auth !== null) {
   router.push('/')
 }

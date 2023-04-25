@@ -12,7 +12,7 @@ import LabelService from '@/core/application/labels/LabelService'
 import SearchNote from '@/core/application/SearchNote'
 
 const router = useRouter()
-const auth = sessionStorage.getItem("auth")
+const auth = sessionStorage.getItem('auth')
 if (auth === null) {
   router.push('/sign-in')
 }
@@ -66,9 +66,9 @@ const filterByLabel = (labelId: number) => {
     .setLabel(labelId)
     .setAllData(allNotes.value)
     .filter()
-  
-    store.dispatch('notes/setNotes', searchNote)
-  
+
+  store.dispatch('notes/setNotes', searchNote)
+
   // setTimeout(() => {
   //   runCollectionByLabelId()
   // }, 500)
@@ -78,7 +78,7 @@ const toggleArray = (labelId: number) => {
   if (!labelIds.includes(labelId)) {
     labelIds.push(labelId)
   } else {
-    labelIds.splice(labelIds.indexOf(labelId), 1);
+    labelIds.splice(labelIds.indexOf(labelId), 1)
   }
 }
 </script>
@@ -93,7 +93,11 @@ const toggleArray = (labelId: number) => {
       <div class="flex-1 ml-auto">
         <div class="flex flex-row gap-1 flex-wrap">
           <template v-for="(label, key) in labels" :key="key">
-            <LabelTag @click="filterByLabel(label.id)" :text="label.name" :status="label.isActive" />
+            <LabelTag
+              @click="filterByLabel(label.id)"
+              :text="label.name"
+              :status="label.isActive"
+            />
           </template>
         </div>
       </div>

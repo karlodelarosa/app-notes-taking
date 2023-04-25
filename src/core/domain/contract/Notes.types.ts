@@ -1,4 +1,4 @@
-import type { LabelIds } from "./Labels.types"
+import type { LabelIds } from './Labels.types'
 
 export interface NoteId {
   id: string | number
@@ -9,7 +9,7 @@ export interface NoteFillable {
   content?: string
 }
 
-export interface AllNotes extends NoteId, NoteFillable { }
+export interface AllNotes extends NoteId, NoteFillable {}
 
 export interface NotesWithLabel extends NoteFillable, LabelIds {}
 

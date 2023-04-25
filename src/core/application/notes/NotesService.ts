@@ -1,7 +1,11 @@
 import * as _ from 'lodash'
 import store from '@/store/index'
 import Request from '@/core/infrastructure/Request'
-import type { NoteId, AllNotesWithLabelIds, NotesWithLabel } from '@/core/domain/contract/Notes.types'
+import type {
+  NoteId,
+  AllNotesWithLabelIds,
+  NotesWithLabel
+} from '@/core/domain/contract/Notes.types'
 
 export default class NotesService extends Request {
   protected static module: string = 'note'
@@ -38,7 +42,7 @@ export default class NotesService extends Request {
 
   async fetchByLabelIds(ids: []) {
     const url = `${import.meta.env.VITE_API_URL}/${this.module}/label`
-    return await this.getByUrl(url ,{ id: ids })
+    return await this.getByUrl(url, { id: ids })
   }
 
   async insert() {
@@ -63,7 +67,7 @@ export default class NotesService extends Request {
     }
     return await this.put(params)
   }
-  
+
   async remove(id: string | number) {
     const params: NoteId = {
       id: id

@@ -25,7 +25,7 @@ watch(selectedLabel, (newVal) => {
 const collection = new NoteLabelCollection()
 
 const filterArticle = _.debounce(async (keyword: string) => {
-  if(keyword.length <= 0) {
+  if (keyword.length <= 0) {
     if (activeLabel.value.length > 0) {
       collection.buildByLabelId(activeLabel.value).then((result) => {
         store.dispatch('notes/setNotes', result)
@@ -42,14 +42,20 @@ const filterArticle = _.debounce(async (keyword: string) => {
     .setLabel(activeLabel.value)
     .setAllData(allData.value)
     .filter()
-  
-    store.dispatch('notes/setNotes', searchNote)
+
+  store.dispatch('notes/setNotes', searchNote)
 }, 500)
 </script>
 
 <template>
   <div class="w-full ml-auto relative">
-    <input v-model="searchText" @input="searchArticle()" type="text" placeholder="Search notes" class="search-input" />
+    <input
+      v-model="searchText"
+      @input="searchArticle()"
+      type="text"
+      placeholder="Search notes"
+      class="search-input"
+    />
     <SearchIcon class="absolute right-[13px] top-[11px]" />
   </div>
 </template>

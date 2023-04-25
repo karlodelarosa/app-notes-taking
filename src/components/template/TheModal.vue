@@ -7,8 +7,6 @@ import DeleteNoteModal from '@/components/organism/modal/DeleteNoteModal.vue'
 const store = useStore()
 const isOpen = computed(() => store.getters['modal/GET_isOpen'])
 const activeModal = computed(() => store.getters['modal/GET_activeModal'])
-
-
 </script>
 <template>
   <div v-show="isOpen" class="modal-wrapper">

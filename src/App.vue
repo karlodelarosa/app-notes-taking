@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 import { RouterView, useRouter } from 'vue-router'
 import TheBaseLayout from './components/template/TheBaseLayout.vue'
-import router from './router';
+import router from './router'
 
 onMounted(() => {
-  const auth = sessionStorage.getItem("auth")
+  const auth = sessionStorage.getItem('auth')
   if (auth === null) {
     router.push('/sign-in')
   }
 })
-
 </script>
 
 <template>

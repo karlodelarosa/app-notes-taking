@@ -6,8 +6,8 @@ import LabelTagStatic from '../atom/label/LabelTagStatic.vue'
 import TagIcon from '@/components/atom/svg/TagIcon.vue'
 
 interface Label {
-  id?: number,
-  name?: string,
+  id?: number
+  name?: string
 }
 
 const store = useStore()
@@ -26,7 +26,7 @@ const isOpenMenu = ref(false)
 const selectedLabels = ref<any>(new Set())
 const addLabel = (params: {}) => {
   const copy = [...selectedLabels.value]
-  const checkData = (obj: any) => obj.id === params.id;
+  const checkData = (obj: any) => obj.id === params.id
   const hasExisting = copy.some(checkData)
   if (!hasExisting) {
     copy.push(params)
@@ -85,13 +85,24 @@ const removeItemFromSet = (index: number) => {
 
     <div class="relative mb-1 flex-none">
       <Transition name="list">
-        <div v-if="isOpenMenu" class="bg-white border shadow-lg absolute top-0 right-[110px] z-50 rounded">
-          <div v-for="(label, id) in labels" @click="addLabel(label)" class="px-3 py-1 hover:bg-gray-100 cursor-pointer">
+        <div
+          v-if="isOpenMenu"
+          class="bg-white border shadow-lg absolute top-0 right-[110px] z-50 rounded"
+        >
+          <div
+            v-for="(label, id) in labels"
+            @click="addLabel(label)"
+            class="px-3 py-1 hover:bg-gray-100 cursor-pointer"
+          >
             {{ label.name }}
           </div>
         </div>
       </Transition>
-      <button type="button" @click="toggleMenu()" class="w-fit h-[28px] rounded-custom-button px-4 ml-auto bg-black text-white text-xs hover:brightness-95 transition-all duration-100 flex flex-row gap-1 items-center">
+      <button
+        type="button"
+        @click="toggleMenu()"
+        class="w-fit h-[28px] rounded-custom-button px-4 ml-auto bg-black text-white text-xs hover:brightness-95 transition-all duration-100 flex flex-row gap-1 items-center"
+      >
         <TagIcon class="w-[15px] h-[15px]" />
         Add Label
       </button>
