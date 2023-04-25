@@ -1,6 +1,7 @@
 import * as _ from 'lodash'
+import store from '@/store/index'
 import Request from '@/core/infrastructure/Request'
-import type { NoteId, NoteFillable, AllNotes, NotesWithLabel } from '@/core/domain/contract/Notes.types'
+import type { NoteId, AllNotesWithLabelIds, NotesWithLabel } from '@/core/domain/contract/Notes.types'
 
 export default class NotesService extends Request {
   protected static module: string = 'note'
@@ -50,10 +51,15 @@ export default class NotesService extends Request {
   }
 
   async update(id: string | number) {
-    const params: AllNotes = {
+    const copy = [...this.labels.values()]
+    const toIds = copy.map((label: any) => {
+      return label.id
+    })
+    const params: any = {
       id: id,
       title: this.title,
-      content: this.content
+      content: this.content,
+      labelIds: toIds
     }
     return await this.put(params)
   }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import LabelService from '@/core/application/labels/LabelService'
 import LabelTagStatic from '../atom/label/LabelTagStatic.vue'
@@ -11,6 +11,10 @@ interface Label {
 }
 
 const store = useStore()
+// const allNotes = computed(() => store.getters['notes/GET_allNotes'])
+// const searchKeyword = computed(() => store.getters['notes/GET_searchKeyword'])
+const selectedLabel = computed(() => store.getters['label/GET_selectedLabels'])
+const selectedNote = computed(() => store.getters['notes/GET_selectedNote'])
 
 const labels = ref()
 const labelService = new LabelService()
@@ -21,17 +25,39 @@ labelService.fetchAll().then((data: Label) => {
 const isOpenMenu = ref(false)
 const selectedLabels = ref<any>(new Set())
 const addLabel = (params: {}) => {
-  selectedLabels.value.add(params)
+  const copy = [...selectedLabels.value]
+  const checkData = (obj: any) => obj.id === params.id;
+  const hasExisting = copy.some(checkData)
+  if (!hasExisting) {
+    copy.push(params)
+    selectedLabels.value = new Set(copy)
+  }
+  dispatchNewLabels(selectedLabels.value)
   isOpenMenu.value = false
 }
 
-watch(selectedLabels.value, (newVal) => {
-  console.info(newVal)
+const dispatchNewLabels = (newVal: any) => {
   store.dispatch('label/setSelectedLabels', newVal)
+}
+
+watch(selectedLabels.value, (newVal) => {
+  dispatchNewLabels(newVal)
+  // store.dispatch('label/setSelectedLabels', newVal)
 })
 
-const openMenu = () => {
-  isOpenMenu.value = true
+watch(selectedNote, () => {
+  selectedLabels.value = selectedLabel.value
+})
+
+setTimeout(() => {
+  modifySelectedLabels()
+}, 100)
+
+const modifySelectedLabels = () => {
+  const newArray = selectedLabel.value.map((data: any) => {
+    return { id: data.label_id, name: data.label }
+  })
+  selectedLabels.value = new Set(newArray)
 }
 
 const toggleMenu = () => {

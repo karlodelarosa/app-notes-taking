@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 const state = () => ({
-  isOpen: true,
-  activeModal: 'create'
+  isOpen: false,
+  activeModal: ''
 })
 
 const actions = {

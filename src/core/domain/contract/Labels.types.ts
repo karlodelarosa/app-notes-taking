@@ -3,7 +3,7 @@ export interface LabelId {
 }
 
 export interface LabelIds {
-  labelIds?: []
+  labelIds: []
 }
 
 export interface LabelFillable {

@@ -11,4 +11,6 @@ export interface NoteFillable {
 
 export interface AllNotes extends NoteId, NoteFillable { }
 
-export interface NotesWithLabel extends  NoteFillable, LabelIds {}
+export interface NotesWithLabel extends NoteFillable, LabelIds {}
+
+export interface AllNotesWithLabelIds extends NoteId, NoteFillable, LabelIds {}
