@@ -29,13 +29,18 @@ const initEdit = (id: string | number, labels: any) => {
 }
 </script>
 <template>
-  <TransitionGroup name="fade" >
+  <TransitionGroup name="fade">
     <div v-for="(note, key) in allNotes" :key="key" class="bg-white rounded-custom-card shadow-xl">
       <div class="px-5 pt-5">
-        <EditIcon @click="initEdit(key, note['labels'])" class="ml-auto hover:brightness-75 cursor-pointer active:scale-95" />
+        <EditIcon
+          @click="initEdit(key, note['labels'])"
+          class="ml-auto hover:brightness-75 cursor-pointer active:scale-95"
+        />
       </div>
       <div class="px-5 py-2">
-        <h1 class="w-full truncate text-3xl font-bold text-gray-700 mb-3">{{ _.unescape(note['title']) }}</h1>
+        <h1 class="w-full truncate text-3xl font-bold text-gray-700 mb-3">
+          {{ _.unescape(note['title']) }}
+        </h1>
         <p class="text-gray-600 h-[250px] overflow-hidden whitespace-pre-wrap hover:overflow-auto">
           {{ _.unescape(note['content']) }}
         </p>
@@ -48,7 +53,10 @@ const initEdit = (id: string | number, labels: any) => {
       </div>
 
       <div class="flex flex-row justify-between items-center border-t border-gray-200 px-5 py-3">
-        <DeleteIcon @click="deleteNote(note['id'])" class="ml-auto hover:brightness-75 cursor-pointer active:scale-95" />
+        <DeleteIcon
+          @click="deleteNote(note['id'])"
+          class="ml-auto hover:brightness-75 cursor-pointer active:scale-95"
+        />
       </div>
     </div>
   </TransitionGroup>

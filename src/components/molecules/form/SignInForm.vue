@@ -16,12 +16,10 @@ const message = ref('')
 const auth = new UserAuthentication()
 
 const signIn = () => {
-  const result = auth.setName(username.value)
-  .setPassword(password.value)
-  .auth()
+  const result = auth.setName(username.value).setPassword(password.value).auth()
 
   result.then((data) => {
-    if(data.success) {
+    if (data.success) {
       isSuccess.value = true
       hasError.value = false
 
@@ -34,17 +32,23 @@ const signIn = () => {
     }
     message.value = data.message
   })
-
-  
 }
 </script>
 
 <template>
   <form @submit.prevent="signIn()" class="py-[30px] flex flex-col gap-3">
-    <div v-if="hasError" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 border-2 border-red-800" role="alert">
+    <div
+      v-if="hasError"
+      class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 border-2 border-red-800"
+      role="alert"
+    >
       {{ message }}
     </div>
-    <div v-if="isSuccess" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 flex flex-row gap-2" role="alert">
+    <div
+      v-if="isSuccess"
+      class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 flex flex-row gap-2"
+      role="alert"
+    >
       <CheckIcon />
       {{ message }} Redirecting ...
     </div>
@@ -70,7 +74,11 @@ const signIn = () => {
     />
 
     <div class="py-[10px]">
-      <button :disabled="isSuccess" class="w-full h-button rounded-custom-button bg-white font-bold" type="submit">
+      <button
+        :disabled="isSuccess"
+        class="w-full h-button rounded-custom-button bg-white font-bold"
+        type="submit"
+      >
         Sign In
       </button>
     </div>

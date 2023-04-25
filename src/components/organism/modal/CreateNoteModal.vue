@@ -40,10 +40,10 @@ const selectedLabel = computed(() => store.getters['label/GET_labels'])
 const saveNote = () => {
   const labelIds = [...selectedLabels.value].map((data) => data.id)
   const response = notes
-  .setTitle(title.value)
-  .setContent(content.value)
-  .setLabels(labelIds)
-  .insert()
+    .setTitle(title.value)
+    .setContent(content.value)
+    .setLabels(labelIds)
+    .insert()
 
   response.then(({ success, message }) => {
     if (success) {

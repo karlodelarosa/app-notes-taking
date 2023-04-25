@@ -116,9 +116,9 @@ export default class Request extends ApiRequest {
     try {
       const { data } = await axios.delete(requestUrl, {
         headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_TOKEN_SECRET}`,
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN_SECRET}`
         },
-        data: params.id,
+        data: params.id
       })
       return new Promise((resolve) => {
         resolve(data)

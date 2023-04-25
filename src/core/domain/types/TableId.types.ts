@@ -1,3 +1,3 @@
 export interface TableId {
-    id: string | number
+  id: string | number
 }

@@ -10,4 +10,4 @@ export interface LabelFillable {
   name: string
 }
 
-export interface AllNotes extends LabelId, LabelFillable { }
+export interface AllNotes extends LabelId, LabelFillable {}

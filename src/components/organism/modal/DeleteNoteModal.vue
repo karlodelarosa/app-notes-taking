@@ -29,9 +29,8 @@ const collection = new NoteLabelCollection()
 
 const note = new NotesService()
 const deleteNote = async () => {
-
   await note.remove(deleteId.value)
-  if(searchKeyword.value.length <= 0) {
+  if (searchKeyword.value.length <= 0) {
     if (selectedLabel.value.length > 0) {
       collection.buildByLabelId(selectedLabel.value).then((result) => {
         store.dispatch('notes/setNotes', result)
@@ -48,26 +47,27 @@ const deleteNote = async () => {
     .setLabel(selectedLabel.value)
     .setAllData(allNotes.value)
     .filter()
-  
-    store.dispatch('notes/setNotes', searchNote)
-    closeModal()
+
+  store.dispatch('notes/setNotes', searchNote)
+  closeModal()
 }
 </script>
 <template>
   <div class="w-2/6 bg-white rounded-custom-modal pb-[30px]">
-    <div class="px-[30px] flex flex-row justify-between relative border-b border-gray-100 py-[30px]">
-        <p class="font-bold">Confirm Action</p>
-        <CloseIcon
-            @click="closeModal()"
-            class="absolute right-[20px] top-[10px] active:scale-95 cursor-pointer"
-            />
+    <div
+      class="px-[30px] flex flex-row justify-between relative border-b border-gray-100 py-[30px]"
+    >
+      <p class="font-bold">Confirm Action</p>
+      <CloseIcon
+        @click="closeModal()"
+        class="absolute right-[20px] top-[10px] active:scale-95 cursor-pointer"
+      />
     </div>
 
     <div class="p-[30px]">
-        <h1 class="font-bold text-lg">Are you sure you want to delete this note?</h1>
-        <p>This note will be permanently deleted.</p>
+      <h1 class="font-bold text-lg">Are you sure you want to delete this note?</h1>
+      <p>This note will be permanently deleted.</p>
     </div>
-    
 
     <div class="">
       <div class="px-[30px] w-[200px] xl:w-2/4 ml-auto flex flex-row gap-3">

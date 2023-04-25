@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as _ from 'lodash'
 import { ref, computed, watch, onMounted } from 'vue'
-import { createToaster } from "@meforma/vue-toaster";
+import { createToaster } from '@meforma/vue-toaster'
 import { useStore } from 'vuex'
 import ButtonPrimary from '../atom/button/ButtonPrimary.vue'
 import NotesService from '@/core/application/notes/NotesService'
@@ -15,7 +15,9 @@ const selectedNoteKey = ref(0)
 const title = ref('')
 const content = ref('')
 
-const toaster = createToaster({ /* options */ });
+const toaster = createToaster({
+  /* options */
+})
 
 const isFormComplete = ref(false)
 const checkFields = () => {
@@ -23,16 +25,16 @@ const checkFields = () => {
 }
 const noteLabelCollection = new NoteLabelCollection()
 const notes = new NotesService()
-const getItems = (() => {
+const getItems = () => {
   noteLabelCollection.buildData().then(async (result) => {
     await store.dispatch('notes/setNotes', result)
     selectedNoteKey.value = selectedNote.value.id
     title.value = _.unescape(selectedNote.value.title)
     content.value = _.unescape(selectedNote.value.content)
-    
+
     await store.dispatch('label/setSelectedLabels', selectedNote.value.labels)
   })
-})
+}
 
 getItems()
 
@@ -61,19 +63,21 @@ const updateNote = () => {
       .setContent(content.value)
       .setLabels(selectedLabel.value)
       .update(selectedNoteKey.value)
-      .then(result => {
-        toaster.success(`Successfully updated!`);
+      .then((result) => {
+        toaster.success(`Successfully updated!`)
       })
   }
 }
-
 </script>
 
 <template>
   <div v-if="selectedNote" class="flex-1 bg-neutral-1 min-h-screen h-fit p-[30px]">
     <div class="grid grid-cols-12 gap-[20px]">
       <div class="col-span-9 bg-white rounded-custom-card" :class="{ 'bg-yellow-100': editMode }">
-        <div class="px-[30px] py-[30px] border-b border-gray-200" :class="{ 'border-yellow-500': editMode }">
+        <div
+          class="px-[30px] py-[30px] border-b border-gray-200"
+          :class="{ 'border-yellow-500': editMode }"
+        >
           <input
             ref="titleInput"
             v-model="title"
@@ -88,11 +92,6 @@ const updateNote = () => {
         </div>
 
         <div class="py-[20px] px-[100px] min-h-[400px] text-gray-700">
-
-
-
-
-
           <!-- <div class="flex flex-row gap-1 flex-wrap mb-[30px]">
             <input type="text" placeholder="Add tags" class="bg-transparent outline-none">
             <template v-for="(item, key) in noteLabel" :key="key">
@@ -100,9 +99,6 @@ const updateNote = () => {
             </template>
             
           </div> -->
-
-
-
 
           <LabelMultiselect />
           <textarea
@@ -115,19 +111,25 @@ const updateNote = () => {
             maxlength="300"
             :required="true"
             @input="checkFields()"
-          ></textarea>  
+          ></textarea>
         </div>
       </div>
 
       <div class="col-span-3 flex flex-col gap-2">
-        <ButtonPrimary @click="updateNote()" :disabled="!isFormComplete" text="Save Changes" :edit-mode="editMode" />
+        <ButtonPrimary
+          @click="updateNote()"
+          :disabled="!isFormComplete"
+          text="Save Changes"
+          :edit-mode="editMode"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-input[type="text"]:disabled, textarea:disabled {
-  @apply bg-transparent
+input[type='text']:disabled,
+textarea:disabled {
+  @apply bg-transparent;
 }
 </style>

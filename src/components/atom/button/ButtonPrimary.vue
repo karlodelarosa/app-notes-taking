@@ -32,12 +32,7 @@ switch (props.size) {
 </script>
 
 <template>
-  <button
-    class="btn-primary"
-    :class="additionalClass"
-    :disabled="disabled"
-    type="submit"
-  >
+  <button class="btn-primary" :class="additionalClass" :disabled="disabled" type="submit">
     <slot name="icon"></slot>
     <span class="leading-none">{{ text }}</span>
   </button>

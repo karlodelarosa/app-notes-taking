@@ -1,5 +1,5 @@
-import NotesService from "./notes/NotesService"
-import LabelsService from "./labels/LabelService"
+import NotesService from './notes/NotesService'
+import LabelsService from './labels/LabelService'
 
 export default class NoteLabelCollection {
   protected notesService: NotesService
@@ -41,7 +41,7 @@ export default class NoteLabelCollection {
         }
       })
     })
-    
+
     return notes
   }
 }
