@@ -45,7 +45,7 @@ const saveNote = () => {
   .setLabels(labelIds)
   .insert()
 
-  response.then(({ success, message}) => {
+  response.then(({ success, message }) => {
     if (success) {
       title.value = ''
       content.value = ''
@@ -54,30 +54,25 @@ const saveNote = () => {
       closeModal()
 
       setTimeout(async () => {
-        if(searchKeyword.value.length <= 0) {
-    if (selectedLabel.value.length > 0) {
-      collection.buildByLabelId(selectedLabel.value).then((result) => {
-        store.dispatch('notes/setNotes', result)
-      })
-    } else {
-      collection.buildData().then((result) => {
-        store.dispatch('notes/setNotes', result)
-      })
-    }
-  }
+        if (searchKeyword.value.length <= 0) {
+          if (selectedLabel.value.length > 0) {
+            collection.buildByLabelId(selectedLabel.value).then((result) => {
+              store.dispatch('notes/setNotes', result)
+            })
+          } else {
+            collection.buildData().then((result) => {
+              store.dispatch('notes/setNotes', result)
+            })
+          }
+        }
 
-  const searchNote = new SearchNote()
-    .setKeyword(searchKeyword.value)
-    .setLabel(selectedLabel.value)
-    .setAllData(allNotes.value)
-    .filter()
-  
-    store.dispatch('notes/setNotes', searchNote)
+        const searchNote = new SearchNote()
+          .setKeyword(searchKeyword.value)
+          .setLabel(selectedLabel.value)
+          .setAllData(allNotes.value)
+          .filter()
 
-
-        // await notes.fetchAll().then((result) => {
-        //   store.dispatch('notes/setNotes', result)
-        // })
+        store.dispatch('notes/setNotes', searchNote)
       }, 300)
     }
   })
