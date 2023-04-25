@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useStore } from 'vuex'
 import LabelService from '@/core/application/labels/LabelService'
 import LabelTagStatic from '../atom/label/LabelTagStatic.vue'
 import TagIcon from '@/components/atom/svg/TagIcon.vue'
@@ -9,8 +10,9 @@ interface Label {
   name?: string,
 }
 
-const labels = ref()
+const store = useStore()
 
+const labels = ref()
 const labelService = new LabelService()
 labelService.fetchAll().then((data: Label) => {
   labels.value = data
@@ -22,6 +24,11 @@ const addLabel = (params: {}) => {
   selectedLabels.value.add(params)
   isOpenMenu.value = false
 }
+
+watch(selectedLabels.value, (newVal) => {
+  console.info(newVal)
+  store.dispatch('label/setSelectedLabels', newVal)
+})
 
 const openMenu = () => {
   isOpenMenu.value = true
@@ -36,6 +43,7 @@ const removeItemFromSet = (index: number) => {
   const obj = [...copy].find((data, key) => key === index)
   copy.delete(obj)
   selectedLabels.value = new Set(copy)
+  store.dispatch('label/setSelectedLabels', selectedLabels.value)
 }
 </script>
 

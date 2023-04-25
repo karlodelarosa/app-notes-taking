@@ -65,3 +65,7 @@
     box-shadow: 0 -1px 1px 0 rgba(0,0,0,.3);
     border-radius: 500rem;
 }
+
+.btn-primary {
+    @apply w-full flex flex-row items-center bg-primary justify-center gap-2 rounded-custom-button text-white hover:brightness-95 transition-all duration-100 disabled:bg-gray-400 disabled:pointer-events-none
+}

@@ -68,7 +68,7 @@ const initEdit = (id: string | number) => {
         </p>
       </div>
 
-      <div class="px-5 mb-5 flex flex-row flex-wrap gap-1 h-[20px]">
+      <div class="px-6 mb-5 flex flex-row flex-wrap gap-4 h-[20px]">
         <template v-for="(item, i) in note['labels']" :key="i">
           <LabelTagStatic :text="item.label" />
         </template>

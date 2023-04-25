@@ -77,8 +77,10 @@ export default class Request extends ApiRequest {
 
   async post(params: NoteFillable): Promise<any> {
     const requestUrl = `${this.getFullUrl()}/${this.insertVerb}`
+    // console.info(JSON.stringify(params))
+    // return
     try {
-      const { data } = await axios.post(requestUrl, params)
+      const { data } = await axios.post(requestUrl, { data: JSON.stringify(params) })
       return new Promise((resolve) => {
         resolve(data)
       })
