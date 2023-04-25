@@ -30,14 +30,21 @@ const openMenu = () => {
 const toggleMenu = () => {
   isOpenMenu.value = !isOpenMenu.value
 }
+
+const removeItemFromSet = (index: number) => {
+  const copy = new Set([...selectedLabels.value])
+  const obj = [...copy].find((data, key) => key === index)
+  copy.delete(obj)
+  selectedLabels.value = new Set(copy)
+}
 </script>
 
 <template>
   <div class="mb-4 flex flex-row gap-1">
     <div class="w-full flex flex-row gap-1 flex-wrap flex-grow">
-      <TransitionGroup name="list" tag="div" class="w-full flex flex-row gap-1 flex-wrap h-fit">
+      <TransitionGroup name="list" tag="div" class="w-full flex flex-row gap-4 flex-wrap h-fit">
         <template v-for="(selected, index) in selectedLabels" :key="index">
-          <LabelTagStatic :text="selected.name" />
+          <LabelTagStatic :text="selected.name" @click="removeItemFromSet(index)" />
         </template>
       </TransitionGroup>
     </div>
@@ -50,8 +57,8 @@ const toggleMenu = () => {
           </div>
         </div>
       </Transition>
-      <button type="button" @click="toggleMenu()" class="w-fit h-8 px-4 ml-auto rounded-custom-button bg-green-500 text-white text-xs hover:brightness-95 transition-all duration-100 flex flex-row gap-1 items-center">
-        <TagIcon class="w-4 h-4" />
+      <button type="button" @click="toggleMenu()" class="w-fit h-[28px] rounded-custom-button px-4 ml-auto bg-black text-white text-xs hover:brightness-95 transition-all duration-100 flex flex-row gap-1 items-center">
+        <TagIcon class="w-[15px] h-[15px]" />
         Add Label
       </button>
     </div>

@@ -8,13 +8,13 @@ defineProps({
 </script>
 
 <template>
-  <div class="note-label">
+  <div class="btn-tag">
     {{ text }}
   </div>
 </template>
 
 <style scoped>
 .note-label {
-  @apply w-fit px-[15px] py-1 rounded-full text-xs border-2 bg-green-500 text-white uppercase;
+  @apply w-fit px-[15px] py-1 text-xs border-2 bg-green-500 text-white uppercase;
 }
 </style>
