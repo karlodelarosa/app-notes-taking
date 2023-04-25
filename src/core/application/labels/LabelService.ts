@@ -1,12 +1,12 @@
 import * as _ from 'lodash'
-import Request from "@/core/infrastructure/Request"
-import type { TableId } from '@/core/domain/types/TableId.types'
+// import Request from "@/core/infrastructure/Request"
+import Request from '@/core/infrastructure/Request'
 
-export default class LabelsService extends Request {
+export default class LabelService extends Request {
   protected static module: string = 'label'
 
   constructor() {
-    super(LabelsService.module)
+    super(LabelService.module)
   }
 
   async getNoteLabelsById(id: string | number) {
