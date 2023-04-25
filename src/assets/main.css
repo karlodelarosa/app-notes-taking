@@ -69,3 +69,7 @@
 .btn-primary {
   @apply w-full flex flex-row items-center bg-primary justify-center gap-2 rounded-custom-button text-white hover:brightness-95 transition-all duration-100 disabled:bg-gray-400 disabled:pointer-events-none;
 }
+
+.top-menu {
+  @apply h-[75px] px-[25px] bg-white shadow-md flex flex-row items-center justify-between fixed right-0 left-0 pl-80 z-40;
+}
