@@ -35,7 +35,7 @@
 }
 
 .btn-tag {
-    @apply w-fit px-[15px] py-1 text-[10px] font-bold bg-green-500 text-white uppercase;
+    @apply w-fit px-[15px] py-1 text-[10px] font-bold bg-green-500 text-white uppercase cursor-pointer active:scale-95;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }

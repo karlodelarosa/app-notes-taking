@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import * as _ from 'lodash'
 import { ref, computed, watch, onMounted } from 'vue'
+import { createToaster } from "@meforma/vue-toaster";
 import { useStore } from 'vuex'
 import ButtonPrimary from '../atom/button/ButtonPrimary.vue'
-import LabelTagStatic from '../atom/label/LabelTagStatic.vue'
 import NotesService from '@/core/application/notes/NotesService'
 import LabelMultiselect from './LabelMultiselect.vue'
-
 import NoteLabelCollection from '@/core/application/NoteLabelCollection'
-
-const noteLabelCollection = new NoteLabelCollection()
 
 const store = useStore()
 const selectedNote = computed(() => store.getters['notes/GET_selectedNote'])
@@ -17,13 +14,14 @@ const selectedLabel = computed(() => store.getters['label/GET_selectedLabels'])
 const selectedNoteKey = ref(0)
 const title = ref('')
 const content = ref('')
-// const noteLabel = ref()
+
+const toaster = createToaster({ /* options */ });
 
 const isFormComplete = ref(false)
 const checkFields = () => {
   isFormComplete.value = title.value !== '' && content.value !== ''
 }
-
+const noteLabelCollection = new NoteLabelCollection()
 const notes = new NotesService()
 const getItems = (() => {
   noteLabelCollection.buildData().then(async (result) => {
@@ -31,11 +29,9 @@ const getItems = (() => {
     selectedNoteKey.value = selectedNote.value.id
     title.value = _.unescape(selectedNote.value.title)
     content.value = _.unescape(selectedNote.value.content)
-    // noteLabel.value = selectedNote.value.labels
     
     await store.dispatch('label/setSelectedLabels', selectedNote.value.labels)
   })
-  
 })
 
 getItems()
@@ -50,14 +46,9 @@ watch(selectedNote, () => {
   selectedNoteKey.value = selectedNote.value.id
   title.value = _.unescape(selectedNote.value.title)
   content.value = _.unescape(selectedNote.value.content)
-  // noteLabel.value = selectedNote.value.labels
   focusInput()
   checkFields()
 })
-
-watch(selectedLabel, () => {
-  console.info('note viewer')
-}, {deep: true})
 
 const titleInput = ref<HTMLInputElement | null>(null)
 const editMode = ref(true)
@@ -71,7 +62,7 @@ const updateNote = () => {
       .setLabels(selectedLabel.value)
       .update(selectedNoteKey.value)
       .then(result => {
-        getItems()
+        toaster.success(`Successfully updated!`);
       })
   }
 }
