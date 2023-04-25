@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as _ from 'lodash'
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { createToaster } from '@meforma/vue-toaster'
 import { useStore } from 'vuex'
 import ButtonPrimary from '../atom/button/ButtonPrimary.vue'

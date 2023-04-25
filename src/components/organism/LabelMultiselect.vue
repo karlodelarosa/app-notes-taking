@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed, onMounted } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useStore } from 'vuex'
 import LabelService from '@/core/application/labels/LabelService'
 import LabelTagStatic from '../atom/label/LabelTagStatic.vue'
@@ -11,8 +11,6 @@ interface Label {
 }
 
 const store = useStore()
-// const allNotes = computed(() => store.getters['notes/GET_allNotes'])
-// const searchKeyword = computed(() => store.getters['notes/GET_searchKeyword'])
 const selectedLabel = computed(() => store.getters['label/GET_selectedLabels'])
 const selectedNote = computed(() => store.getters['notes/GET_selectedNote'])
 
@@ -24,7 +22,7 @@ labelService.fetchAll().then((data: Label) => {
 
 const isOpenMenu = ref(false)
 const selectedLabels = ref<any>(new Set())
-const addLabel = (params: {}) => {
+const addLabel = (params: any) => {
   const copy = [...selectedLabels.value]
   const checkData = (obj: any) => obj.id === params.id
   const hasExisting = copy.some(checkData)
@@ -42,7 +40,6 @@ const dispatchNewLabels = (newVal: any) => {
 
 watch(selectedLabels.value, (newVal) => {
   dispatchNewLabels(newVal)
-  // store.dispatch('label/setSelectedLabels', newVal)
 })
 
 watch(selectedNote, () => {
