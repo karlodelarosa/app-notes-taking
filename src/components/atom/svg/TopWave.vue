@@ -5,6 +5,7 @@
     viewBox="0 0 1920 319"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    class="w-full"
   >
     <g filter="url(#filter0_d_1_1069)">
       <path

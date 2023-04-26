@@ -1,8 +1,22 @@
 <script setup lang="ts">
+import { computed, watch, shallowRef } from 'vue'
+import { useStore } from 'vuex'
 import TheContainer from '@/components/template/TheContainer.vue'
 import SettingSidebarMenu from '@/components/molecules/menu/SettingSidebarMenu.vue'
-import InputField from '@/components/atom/input/InputField.vue'
-import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
+import SettingsGeneralForm from '@/components/molecules/form/SettingsGeneralForm.vue'
+import SettingsAccountForm from '@/components/molecules/form/SettingsAccountForm.vue'
+import SettingsAddLabelForm from '@/components/molecules/form/SettingsAddLabelForm.vue'
+
+const store = useStore()
+const selectedTabId = computed(() => store.getters['settings/GET_selectedMenuID'])
+
+const tabs = [SettingsGeneralForm, SettingsAccountForm, SettingsAddLabelForm]
+const currentTab = shallowRef()
+
+watch(selectedTabId, (newVal) => {
+  currentTab.value = tabs[newVal]
+}, { immediate: true })
+
 </script>
 
 <template>
@@ -12,13 +26,8 @@ import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
         <SettingSidebarMenu />
       </div>
       <div class="flex-1 pl-[50px]">
-        <form>
-          <div class="flex flex-col gap-3 w-72 mb-5">
-            <label class="font-bold">Application Name</label>
-            <InputField placeholder="Application name" />
-          </div>
-          <ButtonPrimary :text="'Save changes'" :btn-size="'xxxx'" class="w-40" />
-        </form>
+        
+        <component :is="currentTab"></component>
       </div>
     </div>
   </TheContainer>
