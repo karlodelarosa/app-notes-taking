@@ -6,7 +6,7 @@ import ApiRequest from './engine/ApiRequest'
 export default class Request extends ApiRequest {
   protected static apiUrl: string = import.meta.env.VITE_API_URL
   protected readonly insertVerb: string = 'add'
-  protected readonly updateVerb: string = 'add'
+  protected readonly updateVerb: string = 'update'
 
   constructor(module: string) {
     super(Request.apiUrl, module)

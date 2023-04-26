@@ -9,6 +9,7 @@ import ButtonPrimary from '@/components/atom/button/ButtonPrimary.vue'
 import NotesService from '@/core/application/notes/NotesService'
 import NoteLabelCollection from '@/core/application/NoteLabelCollection'
 import LabelService from '@/core/application/labels/LabelService'
+import SadIcon from '@/components/atom/svg/SadIcon.vue'
 import SearchNote from '@/core/application/SearchNote'
 
 const router = useRouter()
@@ -103,9 +104,18 @@ const toggleArray = (labelId: number) => {
       </div>
     </div>
 
-    <div class="card-section">
-      <CardNotes :notes="allNotes" />
-    </div>
+    <template v-if="allNotes.length <= 0">
+      <div class="w-full">
+        <SadIcon class="mx-auto w-[80px] h-[80px]" />
+        <h2 class="text-center font-bold text-3xl text-gray-500">No Notes</h2>
+      </div>
+    </template>
+
+    <template v-else>
+      <div class="card-section">
+        <CardNotes :notes="allNotes" />
+      </div>
+    </template>
   </TheContainer>
 </template>
 

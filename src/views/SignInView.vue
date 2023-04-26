@@ -14,13 +14,13 @@ if (auth !== null) {
 
 <template>
   <div class="min-h-screen bg-accent-3">
-    <TopWave class="fixed top-0 left-0" />
+    <TopWave class="fixed top-0 left-0 h-auto" />
 
     <div class="h-screen">
-      <div class="max-w-7xl mx-auto h-full grid grid-cols-2 items-center">
-        <SignInTextContent />
+      <div class="max-w-7xl mx-auto h-full grid grid-cols-1 lg:grid-cols-2 items-center">
+        <SignInTextContent class="hidden lg:block" />
 
-        <div class="sign-in w-2/3 mx-auto">
+        <div class="sign-in w-full px-[30px] lg:px-0 lg:w-2/3 mx-auto">
           <BrandLogoWhite class="mx-auto" />
           <SignInForm />
         </div>
